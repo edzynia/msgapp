@@ -1,0 +1,43 @@
+type User {
+  id: Int!
+  email: String!
+  # password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input SignupInput {
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input SigninInput {
+  email: String!
+  password: String!
+}
+
+type AuthResponse {
+  user: User!
+  jwt: String!
+}
+
+type JwtPayload {
+  email: String!
+  id: Int!
+}
+
+type Mutation {
+  signup(input: SignupInput!): AuthResponse!
+  signin(input: SigninInput!): AuthResponse!
+}
+
+type Query {
+  currentUser: JwtPayload
+}
+
+schema {
+  mutation: Mutation
+  query: Query
+}
